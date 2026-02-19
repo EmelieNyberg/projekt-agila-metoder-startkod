@@ -32,5 +32,5 @@ Signed (✅)
 - ✅ Malin
 - ✅ Jim
 - ✅ Emelie
-- Titus
+- ✅ Titus
 - ✅ Sergio
