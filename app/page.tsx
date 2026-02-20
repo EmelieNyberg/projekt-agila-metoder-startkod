@@ -1,3 +1,4 @@
+import ProductsTable from "@/components/ProductsTable";
 import type { ProductsResponse } from "./types";
 
 const API_URL = "http://localhost:4000";
@@ -28,7 +29,7 @@ export default async function Home() {
 
       {/* Main content area */}
       <main className="">
-        {/*<ProductsTable products={products} />*/}
+        <ProductsTable products={products} />
 
         {/*<div className="">
           <Pagination />
