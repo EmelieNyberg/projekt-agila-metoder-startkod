@@ -1,5 +1,6 @@
 import ProductsTable from "@/components/ProductsTable";
 import type { ProductsResponse } from "./types";
+import Form from "../components/form/form";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -24,8 +25,8 @@ export default async function Home() {
       {/* Header - full width
       <Header /> */}
 
-      {/* Products Search & Filter
-      <Form /> */}
+      {/* Products Search & Filter */}
+      <Form /> 
 
       {/* Main content area */}
       <main className="">
