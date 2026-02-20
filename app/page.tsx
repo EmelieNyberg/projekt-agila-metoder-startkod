@@ -13,7 +13,7 @@ export default async function Home() {
   ).then((res) => res.json());
 
 
-console.log(products);
+  console.log(products);
 
   return (
     <main>
