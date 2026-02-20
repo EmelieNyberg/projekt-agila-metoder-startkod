@@ -1,10 +1,21 @@
 // components/pagination/pagination.tsx
-// Stage 1: Static UI — buttons rendered, no logic yet
-// Goal: match the design mockup (Previous, 1, 2, 3, Next)
-// Purple active page matches team's color scheme (purple-600)
-// Tailwind classes used throughout to match rest of project
+// Stage 2: Added TypeScript props interface
+// Component now accepts data from outside instead of hardcoded values
+// Logic and URL handling coming in Stage 3
 
-export default function Pagination() {
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  totalProducts: number;
+  productsPerPage: number;
+}
+
+export default function Pagination({
+  currentPage,
+  totalPages,
+  totalProducts,
+  productsPerPage,
+}: PaginationProps) {
   return (
     <div className="flex flex-col items-center gap-4 mt-6">
 
