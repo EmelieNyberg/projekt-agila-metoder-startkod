@@ -12,14 +12,13 @@ export default async function Home() {
     `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
   ).then((res) => res.json());
 
-
   //console.log(products);
 
   return (
     <div className="grid h-screen grid-cols-2 bg-gray-100">
       {/* Sidebar - fixed width, full height
       <Sidebar />*/}
-      
+
       {/* Header - full width
       <Header /> */}
 
@@ -35,5 +34,5 @@ export default async function Home() {
         </div>*/}
       </main>
     </div>
-  )
+  );
 }
