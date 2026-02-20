@@ -13,12 +13,27 @@ export default async function Home() {
   ).then((res) => res.json());
 
 
-console.log(products);
+  //console.log(products);
 
   return (
-    <main>
-      <h1>Products</h1>
-      <div>{products.map((product) => <h2 key={product.id}>{product.title} - {product.category?.name}</h2>)}</div>
-    </main>
-  );
+    <div className="grid h-screen grid-cols-2 bg-gray-100">
+      {/* Sidebar - fixed width, full height
+      <Sidebar />*/}
+      
+      {/* Header - full width
+      <Header /> */}
+
+      {/* Products Search & Filter
+      <Form /> */}
+
+      {/* Main content area */}
+      <main className="">
+        {/*<ProductsTable products={products} />*/}
+
+        {/*<div className="">
+          <Pagination />
+        </div>*/}
+      </main>
+    </div>
+  )
 }
