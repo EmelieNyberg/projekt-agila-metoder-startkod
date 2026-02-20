@@ -21,7 +21,7 @@ export default async function Home() {
   return (
     <div
       className="min-h-screen md:grid 
-      md:[grid-template-areas:'sidebar_form_form''sidebar_main_main']"
+      md:[grid-template-areas:'sidebar_header_header''sidebar_form_form''sidebar_main_main']"
     >
       {/* Sidebar - fixed width, full height
       <Sidebar />*/}
