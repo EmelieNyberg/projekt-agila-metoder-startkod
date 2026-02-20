@@ -1,3 +1,4 @@
+// Props types
 type StatsCardProps = {
     title: string;
     value: number;
@@ -7,8 +8,10 @@ type StatsCardProps = {
 };
 
 export default function StatsCard({ title, value, icon: Icon, color, bg }: StatsCardProps) {
+
+    // One stats card
     return (
-        <div className="flex justify-between items-center p-6 bg-white rounded-xl shadow-sm">
+        <article className="flex justify-between items-center p-6 bg-white rounded-xl shadow-sm">
             <div>
                 <p className="text-sm text-gray-500">{title}</p>
                 <h2 className="text-2xl font-semibold">{value}</h2>
@@ -17,6 +20,6 @@ export default function StatsCard({ title, value, icon: Icon, color, bg }: Stats
             <div className={`p-3 rounded-lg ${bg}`}>
                 <Icon className={color} size={24} />
             </div>
-        </div>
+        </article>
     );
 };

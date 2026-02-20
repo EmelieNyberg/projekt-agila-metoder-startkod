@@ -1,6 +1,7 @@
 import { Package, CircleCheck, TriangleAlert, CircleX } from "lucide-react";
 import StatsCard from "./stats-card";
 
+// All cards with statistics (at the moment placeholder info)
 const stats = [
     {
         title: "Total products",
@@ -34,7 +35,9 @@ const stats = [
 
 export default function PageHeader() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        // Section with all stats cards
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((stat) => (
                 <StatsCard
                     key={stat.title}
@@ -45,6 +48,6 @@ export default function PageHeader() {
                     bg={stat.bg}
                 />
             ))}
-        </div>
+        </section>
     );
 };
