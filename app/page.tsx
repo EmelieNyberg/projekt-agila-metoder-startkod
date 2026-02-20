@@ -1,7 +1,7 @@
 import type { ProductsResponse } from "@/lib/types/product";
-import ProductsTable from "@/components/ProductsTable";
 import Sidebar from "@/components/sidebar";
 import Form from "../components/form/form";
+import ProductTable from "@/components/product-table/product-table";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -34,7 +34,7 @@ export default async function Home() {
         {/* Products Search & Filter */}
         <Form />
 
-        <ProductsTable products={products} />
+        <ProductTable products={products} />
 
         {/*<div className="">
           <Pagination />

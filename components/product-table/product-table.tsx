@@ -1,11 +1,11 @@
-import type { Product } from "@/app/types";
-import ProductTableRow from "./ProductTableRow";
+import type { Product } from "@/lib/types/product";
+import ProductTableRow from "./product-table-row";
 
 interface ProductsTableProps {
   products: Product[];
 }
 
-export default function ProductsTable({ products }: ProductsTableProps) {
+export default function ProductTable({ products }: ProductsTableProps) {
   return (
     <table className="w-full">
       <thead>
