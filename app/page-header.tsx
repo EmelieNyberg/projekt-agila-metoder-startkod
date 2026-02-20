@@ -1,5 +1,7 @@
 import { Package, CircleCheck, TriangleAlert, CircleX } from "lucide-react";
 import StatsCard from "./stats-card";
+import AddProductButton from "./add-product-button";
+
 
 // All cards with statistics (at the moment placeholder info)
 const stats = [
@@ -35,19 +37,28 @@ const stats = [
 
 export default function PageHeader() {
     return (
+        <header>
+            <section className="flex justify-between p-2 shadow-sm">
+                <div>
+                    <h1 className="text-xl font-semibold">Product management</h1>
+                    <p className="text-sm text-gray-500">Manage your store inventory</p>
+                </div>
+                <AddProductButton />
+            </section>
 
-        // Section with all stats cards
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((stat) => (
-                <StatsCard
-                    key={stat.title}
-                    title={stat.title}
-                    value={stat.value}
-                    icon={stat.icon}
-                    color={stat.color}
-                    bg={stat.bg}
-                />
-            ))}
-        </section>
+            {/* Section with all stats cards */}
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-2">
+                {stats.map((stat) => (
+                    <StatsCard
+                        key={stat.title}
+                        title={stat.title}
+                        value={stat.value}
+                        icon={stat.icon}
+                        color={stat.color}
+                        bg={stat.bg}
+                    />
+                ))}
+            </section>
+        </header>
     );
 };
