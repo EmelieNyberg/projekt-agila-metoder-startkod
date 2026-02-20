@@ -1,6 +1,6 @@
-// import Sidebar from "@/components/sidebar";
-import ProductsTable from "@/components/ProductsTable";
 import type { ProductsResponse } from "@/lib/types/product";
+import ProductsTable from "@/components/ProductsTable";
+import Sidebar from "@/components/sidebar";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -17,9 +17,13 @@ export default async function Home() {
   //console.log(products);
 
   return (
-    <div className="grid h-screen grid-cols-2 bg-gray-100">
+    <div
+      className="min-h-screen md:grid 
+      md:[grid-template-areas:'sidebar_main_main']"
+    >
       {/* Sidebar - fixed width, full height
       <Sidebar />*/}
+      <Sidebar className="sticky top-0 bg-white h-screen md:[grid-area:sidebar]" />
 
       {/* Header - full width
       <Header /> */}
@@ -28,7 +32,7 @@ export default async function Home() {
       <Form /> */}
 
       {/* Main content area */}
-      <main className="">
+      <main className="min-h-screen bg-neutral-100 md:[grid-area:main]">
         <ProductsTable products={products} />
 
         {/*<div className="">

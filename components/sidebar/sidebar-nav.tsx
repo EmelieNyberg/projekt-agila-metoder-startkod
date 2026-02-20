@@ -3,7 +3,7 @@ import SidebarNavItem from "./sidebar-nav-item";
 
 export default function SidebarNav() {
   const navItems: NavItem[] = [
-    { label: "Products", link: "/admin/products", icon: "package-2" },
+    { label: "Products", link: "/", icon: "package-2" },
     { label: "Analytics", link: "/admin/analytics", icon: "chart-line" },
     { label: "Orders", link: "/admin/orders", icon: "shopping-cart" },
     { label: "Customers", link: "/admin/customers", icon: "users" },
