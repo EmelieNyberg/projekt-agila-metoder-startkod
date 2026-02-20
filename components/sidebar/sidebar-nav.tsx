@@ -11,10 +11,10 @@ export default function SidebarNav() {
   ];
 
   return (
-    <nav>
+    <nav aria-label="Main navigation">
       <ul className="px-6 py-3 space-y-1.5">
         {navItems.map((item: NavItem) => (
-          <li key={item.link}>
+          <li key={item.link.toString()}>
             <SidebarNavItem item={item} />
           </li>
         ))}

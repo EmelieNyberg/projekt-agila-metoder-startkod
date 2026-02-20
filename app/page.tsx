@@ -1,4 +1,5 @@
-import type { ProductsResponse } from "./types";
+// import Sidebar from "@/components/sidebar";
+import type { ProductsResponse } from "@/lib/types/product";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
