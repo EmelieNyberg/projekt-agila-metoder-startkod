@@ -1,7 +1,12 @@
 // components/pagination/pagination.tsx
-// Stage 2: Added TypeScript props interface
-// Component now accepts data from outside instead of hardcoded values
-// Logic and URL handling coming in Stage 3
+// Stage 3: Added click logic and URL param syncing
+// Previous/Next now clickable
+// URL updates to ?page=2 when clicking pages
+// Previous disabled on page 1, Next disabled on last page
+
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface PaginationProps {
   currentPage: number;
@@ -15,37 +20,70 @@ export default function Pagination({
   totalPages,
   totalProducts,
   productsPerPage,
-}: PaginationProps) {
+}:
+
+//click logic and URL param syncing added in Stage 3, so these props are now required
+PaginationProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // This function updates the URL when a page is clicked
+  const goToPage = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    router.push(`?${params.toString()}`);
+  };
+
   return (
     <div className="flex flex-col items-center gap-4 mt-6">
 
-      {/* Metadata text - will be dynamic in Stage 5 */} // For now, it’s hardcoded to show 1 to 6 of 248 products
-
+      {/* Metadata text - still static, dynamic in Stage 5 */}
       <p className="text-sm text-gray-500">
         Showing 1 to 6 of 248 products
       </p>
 
-      {/* Pagination controls */}
       <div className="flex items-center gap-2">
 
-        {/* Previous button - will be disabled on page 1 in Stage 3 */}
-        <button className="px-3 py-1 rounded border text-sm hover:bg-gray-100">
+        {/* Previous — now has onClick and disabled state */}
+        <button
+          onClick={() => goToPage(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-3 py-1 rounded border text-sm
+            disabled:opacity-40 disabled:cursor-not-allowed
+            hover:bg-gray-100"
+        >
           Previous
         </button>
 
-        {/* Page numbers - hardcoded for now, dynamic in Stage 4 */}
-        <button className="px-3 py-1 rounded border text-sm bg-purple-600 text-white border-purple-600">
+        {/* Page numbers still hardcoded - dynamic in Stage 4 */}
+        <button
+          onClick={() => goToPage(1)}
+          className="px-3 py-1 rounded border text-sm
+            bg-purple-600 text-white border-purple-600"
+        >
           1
         </button>
-        <button className="px-3 py-1 rounded border text-sm hover:bg-gray-100">
+        <button
+          onClick={() => goToPage(2)}
+          className="px-3 py-1 rounded border text-sm hover:bg-gray-100"
+        >
           2
         </button>
-        <button className="px-3 py-1 rounded border text-sm hover:bg-gray-100">
+        <button
+          onClick={() => goToPage(3)}
+          className="px-3 py-1 rounded border text-sm hover:bg-gray-100"
+        >
           3
         </button>
 
-        {/* Next button - will be disabled on last page in Stage 3 */}
-        <button className="px-3 py-1 rounded border text-sm hover:bg-gray-100">
+        {/* Next — now has onClick and disabled state */}
+        <button
+          onClick={() => goToPage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-3 py-1 rounded border text-sm
+            disabled:opacity-40 disabled:cursor-not-allowed
+            hover:bg-gray-100"
+        >
           Next
         </button>
 
