@@ -2,9 +2,9 @@
 
 import { Filter, ChevronDown } from "lucide-react";
 
-export default function FilterForm() {
+export default function FilterControls() {
   return (
-    <form className="flex gap-3 items-center">
+    <div className="flex gap-3 items-center">
 
       {/* Category Dropdown */}
       <div className="relative">
@@ -13,7 +13,7 @@ export default function FilterForm() {
           className="appearance-none rounded-lg border border-gray-300 bg-white px-3 pr-10 py-2 text-sm"
           defaultValue=""
         >
-          <option value="">All categories</option>
+          <option value="all">All categories</option>
           {/* Categories will be added later */}
         </select>
 
@@ -27,7 +27,7 @@ export default function FilterForm() {
           className="appearance-none rounded-lg border border-gray-300 bg-white px-3 pr-10 py-2 text-sm"
           defaultValue=""
         >
-          <option value="">All status</option>
+          <option value="all">All status</option>
           <option value="in-stock">In stock</option>
           <option value="low-stock">Low stock</option>
           <option value="out-of-stock">Out of stock</option>
@@ -42,6 +42,6 @@ export default function FilterForm() {
         Filter
       </button>
 
-    </form>
+    </div>
   );
 }

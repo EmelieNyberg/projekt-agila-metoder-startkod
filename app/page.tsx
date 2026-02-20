@@ -1,19 +1,31 @@
 import type { ProductsResponse } from "@/lib/types/product";
 import Sidebar from "@/components/sidebar";
-import Form from "../components/form/form";
+import ProductFilterForm from "../components/form/product-filter-form";
 import ProductTable from "@/components/product-table/product-table";
 import PageHeader from "@/components/header/page-header";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    search?: string;
+    category?: string;
+    status?: string;
+  }>;
+}) {
+  const params = await searchParams;
+
+  const search = params?.search || "";
+  const searchQuery = search ? `&q=${search}` : "";
   // we use the fetch() method to get the products from the API
   // in this fetch we sort using _sort and _order and we limit the number of products using _limit
   // we also use _expand to get the relational category data
   // we can use the other destructed variables like page, total and so on to create pagination or show info
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
-    `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
+    `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category${searchQuery}`,
   ).then((res) => res.json());
 
   //console.log(products);
@@ -33,7 +45,7 @@ export default async function Home() {
       {/* Main content area */}
       <main className="min-h-screen  md:[grid-area:main] p-6 ">
         {/* Products Search & Filter */}
-        <Form />
+        <ProductFilterForm />
 
         <ProductTable products={products} />
 
