@@ -38,9 +38,9 @@ const stats = [
 export default function PageHeader() {
     return (
         <header>
-            <section className="flex justify-between p-2 shadow-sm">
+            <section className="flex justify-between p-2 border-b border-neutral-200">
                 <div>
-                    <h1 className="text-xl font-semibold">Product management</h1>
+                    <h1 className="text-2xl font-semibold">Product management</h1>
                     <p className="text-sm text-gray-500">Manage your store inventory</p>
                 </div>
                 <AddProductButton />

@@ -2,6 +2,7 @@ import type { ProductsResponse } from "@/lib/types/product";
 import Sidebar from "@/components/sidebar";
 import Form from "../components/form/form";
 import ProductTable from "@/components/product-table/product-table";
+import PageHeader from "@/components/header/page-header";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -26,8 +27,8 @@ export default async function Home() {
       <Sidebar />*/}
       <Sidebar className="sticky top-0 bg-white h-screen md:[grid-area:sidebar] border-r border-r-neutral-300" />
 
-      {/* Header - full width
-      <Header /> */}
+      {/* Header - full width */}
+      <PageHeader />
 
       {/* Main content area */}
       <main className="min-h-screen  md:[grid-area:main] p-6 ">
