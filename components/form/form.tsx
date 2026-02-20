@@ -5,7 +5,7 @@ import FilterForm from "./filter-form";
 
 export default function Form() {
   return (
-    <div className="flex items-center justify-between p-4">
+    <div className="flex gap-3 self-start w-full rounded-xl bg-gray-50 py-3 px-3 border border-gray-200">
 
       <SearchForm />
       <FilterForm />

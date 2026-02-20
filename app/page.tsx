@@ -1,5 +1,5 @@
 import type { ProductsResponse } from "./types";
-import Form from "@/components/form/form";
+import Form from "../components/form/form";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
