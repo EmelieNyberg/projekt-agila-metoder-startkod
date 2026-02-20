@@ -11,7 +11,7 @@ export default function StatsCard({ title, value, icon: Icon, color, bg }: Stats
 
     // One stats card
     return (
-        <article className="flex justify-between items-center p-6 bg-white rounded-xl shadow-sm">
+        <article className="flex justify-between items-center p-6 bg-white rounded-xl border border-neutral-200">
             <div>
                 <p className="text-sm text-gray-500">{title}</p>
                 <h2 className="text-2xl font-semibold">{value}</h2>

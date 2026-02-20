@@ -10,7 +10,7 @@ export default function AddProductButton() {
         <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition cursor-pointer"
+                className="bg-purple-900/80 text-white px-4 py-2.5 rounded-lg hover:bg-purple-900/85 transition cursor-pointer"
             >
                 + Add product
             </button>
