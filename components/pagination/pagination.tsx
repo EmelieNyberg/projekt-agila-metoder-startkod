@@ -19,7 +19,8 @@ export default function Pagination({
   return (
     <div className="flex flex-col items-center gap-4 mt-6">
 
-      {/* Metadata text - will be dynamic in Stage 5 */}
+      {/* Metadata text - will be dynamic in Stage 5 */} // For now, it’s hardcoded to show 1 to 6 of 248 products
+
       <p className="text-sm text-gray-500">
         Showing 1 to 6 of 248 products
       </p>
