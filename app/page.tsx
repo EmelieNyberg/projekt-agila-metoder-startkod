@@ -1,6 +1,6 @@
 import type { ProductsResponse } from "@/lib/types/product";
 import Sidebar from "@/components/sidebar";
-import Form from "../components/form/form";
+import ProductFilterForm from "../components/form/product-filter-form";
 import ProductTable from "@/components/product-table/product-table";
 import PageHeader from "@/components/header/page-header";
 
@@ -46,7 +46,7 @@ export default async function Home({
       {/* Main content area */}
       <main className="min-h-screen  md:[grid-area:main] p-6 ">
         {/* Products Search & Filter */}
-        <Form />
+        <ProductFilterForm />
 
         <ProductTable products={products} />
 
