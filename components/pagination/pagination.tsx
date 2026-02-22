@@ -3,13 +3,14 @@
 // Previous/Next now clickable
 // URL updates to ?page=2 when clicking pages
 // Previous disabled on page 1, Next disabled on last page
+//
 
-"use client";
+"use client"; // This component needs to be a client component to use hooks like useRouter and useSearchParams
 
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface PaginationProps {
-  currentPage: number;
+  currentPage: number;  
   totalPages: number;
   totalProducts: number;
   productsPerPage: number;
@@ -84,8 +85,8 @@ PaginationProps) {
             disabled:opacity-40 disabled:cursor-not-allowed
             hover:bg-gray-100"
         >
-          Next
-        </button>
+          Next 
+        </button> 
 
       </div>
     </div>
