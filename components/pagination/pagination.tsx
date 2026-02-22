@@ -38,11 +38,15 @@ export default function Pagination({
     return pages;
   };
 
-  
+   const showingFrom = (currentPage - 1) * productsPerPage + 1;
+   const showingTo = Math.min(currentPage * productsPerPage, totalProducts);
+
   return (
     <div className="flex flex-col items-center gap-4 mt-6">
       <p className="text-sm text-gray-500">
-        Showing 1 to 6 of 248 products
+        //Showing 1 to 6 of 248 products//-----static line before swtuching to dynamic line using props
+          Showing {showingFrom} to {showingTo} of {totalProducts} products //-----dynamic line using props //
+
       </p>
       <div className="flex items-center gap-2">
         <button
