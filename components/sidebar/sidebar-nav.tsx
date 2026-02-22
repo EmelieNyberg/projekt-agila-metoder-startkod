@@ -1,7 +1,7 @@
 import type { NavItem } from "@/lib/types";
 import SidebarNavItem from "./sidebar-nav-item";
 
-export default function SidebarNav() {
+export default function SidebarNav({ className }: { className?: string }) {
   const navItems: NavItem[] = [
     { label: "Products", link: "/", icon: "package-2" },
     { label: "Analytics", link: "/admin/analytics", icon: "chart-line" },
@@ -11,7 +11,7 @@ export default function SidebarNav() {
   ];
 
   return (
-    <nav aria-label="Main navigation">
+    <nav aria-label="Main navigation" className={`${className}`}>
       <ul className="px-6 py-3 space-y-1.5">
         {navItems.map((item: NavItem) => (
           <li key={item.link.toString()}>

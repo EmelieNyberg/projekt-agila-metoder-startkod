@@ -38,7 +38,7 @@ export default async function Home({
     >
       {/* Sidebar - fixed width, full height
       <Sidebar />*/}
-      <Sidebar className="sticky top-0 bg-white h-screen md:[grid-area:sidebar] border-r border-r-neutral-300" />
+      <Sidebar className="sticky top-0 bg-white h-screen md:[grid-area:sidebar] md:border-r md:border-r-neutral-300" />
 
       {/* Header - full width */}
       <PageHeader />
