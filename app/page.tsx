@@ -6,8 +6,6 @@ import PageHeader from "@/components/header/page-header";
 import Pagination from "@/components/pagination/pagination";
 import EmptyState from "../components/form/empty-state"
 
-// Comment
-
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
 
