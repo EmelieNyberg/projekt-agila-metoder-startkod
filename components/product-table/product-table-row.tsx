@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { Edit, Trash2 } from "lucide-react";
+import { Delete, Edit, Trash2 } from "lucide-react";
 import type { Product } from "@/lib/types/product";
+import { DeleteButton } from "@/components/form/delete-button";
 
 interface ProductTableRowProps {
   product: Product;
@@ -44,12 +45,11 @@ export default function ProductTableRow({ product }: ProductTableRowProps) {
       </td>
       <td className="p-4">
         <div className="flex gap-1 justify-center">
-          <button type="button" className="p-1.5 rounded-md hover:bg-neutral-100 text-purple-600">
+          <button type="button" className="p-1.5 rounded-md hover:bg-neutral-100 text-purple-600 cursor-pointer">
             <Edit size={16} />
           </button>
-          <button type="button" className="p-1.5 rounded-md hover:bg-neutral-100 text-red-600">
-            <Trash2 size={16} />
-          </button>
+          
+          <DeleteButton id={product.id.toString()} />
         </div>
       </td>
     </tr>
