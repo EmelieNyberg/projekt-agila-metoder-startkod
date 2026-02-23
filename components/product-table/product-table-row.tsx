@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Delete, Edit, Trash2 } from "lucide-react";
+import { Edit } from "lucide-react";
 import type { Product } from "@/lib/types/product";
 import { DeleteButton } from "@/components/form/delete-button";
 
@@ -48,7 +48,7 @@ export default function ProductTableRow({ product }: ProductTableRowProps) {
           <button type="button" className="p-1.5 rounded-md hover:bg-neutral-100 text-purple-600 cursor-pointer">
             <Edit size={16} />
           </button>
-          
+
           <DeleteButton id={product.id.toString()} />
         </div>
       </td>
