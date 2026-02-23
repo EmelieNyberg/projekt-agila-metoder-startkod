@@ -16,30 +16,29 @@ export default async function Home({
     search?: string;
     category?: string;
     status?: string;
+    page?: string;
   }>;
 }) {
   const params = await searchParams;
 
   const search = params?.search || "";
   const searchQuery = search ? `&q=${search}` : "";
+  const currentPage = Number(params?.page) || 1;
 
   // we use the fetch() method to get the products from the API
   // in this fetch we sort using _sort and _order and we limit the number of products using _limit
   // we also use _expand to get the relational category data
   // we can use the other destructed variables like page, total and so on to create pagination or show info
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
-    `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category${searchQuery}`,
+    `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category&_page=${currentPage}&${searchQuery}`,
   ).then((res) => res.json());
 
-  //console.log(products);
 
   return (
     <div
       className="min-h-screen md:grid 
       md:[grid-template-areas:'sidebar_header_header''sidebar_form_form''sidebar_main_main']"
     >
-      {/* Sidebar - fixed width, full height
-      <Sidebar />*/}
       <Sidebar className="sticky top-0 bg-white h-screen md:[grid-area:sidebar] border-r border-r-neutral-300" />
 
       {/* Header - full width */}
@@ -58,10 +57,10 @@ export default async function Home({
         )}
 
         <Pagination
-          currentPage={page}
+          currentPage={currentPage}
           totalPages={pages}
           totalProducts={total}
-          productsPerPage={limit}
+          productsPerPage={Number(defaultLimit)}
         />
       </main>
     </div>
