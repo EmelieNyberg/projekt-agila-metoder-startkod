@@ -49,7 +49,7 @@ export default function ProductTableRow({ product }: ProductTableRowProps) {
             <Edit size={16} />
           </button>
 
-          <DeleteButton id={product.id.toString()} />
+          <DeleteButton id={product.id} />
         </div>
       </td>
     </tr>
