@@ -4,6 +4,7 @@ import ProductFilterForm from "../components/form/product-filter-form";
 import ProductTable from "@/components/product-table/product-table";
 import PageHeader from "@/components/header/page-header";
 import Pagination from "@/components/pagination/pagination";
+import EmptyState from "../components/form/empty-state"
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -49,7 +50,12 @@ export default async function Home({
         {/* Products Search & Filter */}
         <ProductFilterForm />
 
-        <ProductTable products={products} />
+        {/* Product listing */}
+        {products.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <ProductTable products={products} />
+        )}
 
         <Pagination
           currentPage={page}
