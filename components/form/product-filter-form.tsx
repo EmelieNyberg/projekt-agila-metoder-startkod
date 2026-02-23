@@ -4,11 +4,28 @@ import Form from "next/form";
 import SearchInput from "./search-input";
 import FilterControls from "./filter-controls";
 
-export default function ProductFilterForm() {
+type Category = {
+  id: number;
+  name: string;
+};
+
+type Props = {
+  categories: Category[];
+  search: string;
+  category: string;
+};
+
+export default function ProductFilterForm({
+  categories,
+  search,
+  category,
+}: Props) {
   return (
     <Form action="/" className="flex border border-gray-300 rounded-lg p-3 items-center gap-4 w-full">
-      <SearchInput />
-      <FilterControls />
+      <SearchInput search={search} />
+      <FilterControls 
+        categories={categories}
+        category={category}/>
     </Form>
   );
 }
