@@ -63,11 +63,9 @@ export default function Pagination({
           <button
             key={page}
             onClick={() => goToPage(page)}
-            className={`px-3 py-1 rounded border text-sm
-              ${page === currentPage
-                ? "bg-purple-600 text-white border-purple-600"
-                : "hover:bg-gray-100"
-              }`}
+            className="px-3 py-1 rounded border text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100"
+
+              
           >
             {page}
           </button>
