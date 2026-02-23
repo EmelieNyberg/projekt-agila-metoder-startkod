@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import type { ProductsResponse } from "@/lib/types/product";
 import Sidebar from "@/components/sidebar";
 import ProductFilterForm from "../components/form/product-filter-form";
