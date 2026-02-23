@@ -44,12 +44,11 @@ export default function Pagination({
   return (
     <div className="flex flex-col items-center gap-4 mt-6">
       <p className="text-sm text-gray-500">
-        //Showing 1 to 6 of 248 products//-----static line before swtuching to dynamic line using props
-          Showing {showingFrom} to {showingTo} of {totalProducts} products //-----dynamic line using props //
-
+          Showing {showingFrom} to {showingTo} of {totalProducts} products
       </p>
       <div className="flex items-center gap-2">
         <button
+          type="button"
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
           className="px-3 py-1 rounded border text-sm
@@ -61,6 +60,7 @@ export default function Pagination({
 
         {getPageNumbers().map((page) => (
           <button
+            type="button"
             key={page}
             onClick={() => goToPage(page)}
             className="px-3 py-1 rounded border text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100"
@@ -72,6 +72,7 @@ export default function Pagination({
         ))}
 
         <button
+          type="button"
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === totalPages}
           className="px-3 py-1 rounded border text-sm
