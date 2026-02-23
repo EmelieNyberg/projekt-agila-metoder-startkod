@@ -3,6 +3,7 @@ import Sidebar from "@/components/sidebar";
 import ProductFilterForm from "../components/form/product-filter-form";
 import ProductTable from "@/components/product-table/product-table";
 import PageHeader from "@/components/header/page-header";
+import Pagination from "@/components/pagination/pagination";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -50,9 +51,12 @@ export default async function Home({
 
         <ProductTable products={products} />
 
-        {/*<div className="">
-          <Pagination />
-        </div>*/}
+        <Pagination
+          currentPage={page}
+          totalPages={pages}
+          totalProducts={total}
+          productsPerPage={limit}
+        />
       </main>
     </div>
   );
