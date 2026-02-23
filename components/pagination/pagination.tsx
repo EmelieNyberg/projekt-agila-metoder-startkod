@@ -1,5 +1,4 @@
 // Stage 4: Page numbers now dynamic using props
-
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
@@ -51,9 +50,7 @@ export default function Pagination({
           type="button"
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-3 py-1 rounded border text-sm
-            disabled:opacity-40 disabled:cursor-not-allowed
-            hover:bg-gray-100"
+          className="px-3 py-1 rounded border text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100"
         >
           Previous
         </button>
@@ -64,9 +61,7 @@ export default function Pagination({
             key={page}
             onClick={() => goToPage(page)}
             className="px-3 py-1 rounded border text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100"
-
-              
-          >
+            >
             {page}
           </button>
         ))}
@@ -75,9 +70,7 @@ export default function Pagination({
           type="button"
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-3 py-1 rounded border text-sm
-            disabled:opacity-40 disabled:cursor-not-allowed
-            hover:bg-gray-100"
+          className="px-3 py-1 rounded border text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100"
         >
           Next
         </button>
