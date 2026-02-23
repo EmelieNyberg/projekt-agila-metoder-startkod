@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { ProductsResponse } from "@/lib/types/product";
 import ProductsTable from "@/components/ProductsTable";
 import Sidebar from "@/components/sidebar";
@@ -10,12 +11,11 @@ const defaultLimit = "6";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: { page?: string };
 }) {
-  const resolvedParams = await searchParams;
-  const currentPage = Number(resolvedParams?.page) || 1;
+  const currentPage = Number(searchParams?.page) || 1;
 
-  const { products, total, page, pages, limit }: ProductsResponse = await fetch(
+  const { products, total, pages }: ProductsResponse = await fetch(
     `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category&_page=${currentPage}`,
   ).then((res) => res.json());
 
@@ -30,13 +30,14 @@ export default async function Home({
         <Form />
         <ProductsTable products={products} />
 
-        {/* Pagination connected to real data */}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={pages}
-          totalProducts={total}
-          productsPerPage={Number(defaultLimit)}
-        />
+        <Suspense fallback={null}> // Suspense wrapper for the Pagination component to handle loading state
+          <Pagination
+            currentPage={currentPage}
+            totalPages={pages}
+            totalProducts={total}
+            productsPerPage={Number(defaultLimit)}
+          />
+        </Suspense>
       </main>
     </div>
   );
