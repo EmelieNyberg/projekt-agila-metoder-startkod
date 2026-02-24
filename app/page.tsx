@@ -4,7 +4,7 @@ import ProductFilterForm from "../components/form/product-filter-form";
 import ProductTable from "@/components/product-table/product-table";
 import PageHeader from "@/components/header/page-header";
 import Pagination from "@/components/pagination/pagination";
-import EmptyState from "../components/form/empty-state"
+import EmptyState from "../components/form/empty-state";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -49,14 +49,12 @@ export default async function Home({
     `${API_URL}/products?${query}`,
   ).then((res) => res.json());
 
-  console.log("QUERY:", `${API_URL}/products?${query}`);
-
   return (
     <div
       className="min-h-screen md:grid 
       md:[grid-template-areas:'sidebar_header_header''sidebar_form_form''sidebar_main_main']"
     >
-      <Sidebar className="sticky top-0 bg-white h-screen md:[grid-area:sidebar] border-r border-r-neutral-300" />
+      <Sidebar className="md:[grid-area:sidebar]  " />
 
       {/* Header - full width */}
       <PageHeader />
@@ -64,7 +62,7 @@ export default async function Home({
       {/* Main content area */}
       <main className="min-h-screen  md:[grid-area:main] p-6 ">
         {/* Products Search & Filter */}
-        <ProductFilterForm 
+        <ProductFilterForm
           categories={categories}
           search={search}
           category={category}
