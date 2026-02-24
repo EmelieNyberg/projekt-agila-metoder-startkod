@@ -1,22 +1,20 @@
-// Stage 4: Page numbers now dynamic using props
+// components/pagination/pagination.tsx
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-// Props for the Pagination component
-interface PaginationProps { 
+interface PaginationProps {
   currentPage: number;
   totalPages: number;
   totalProducts: number;
   productsPerPage: number;
 }
-// Pagination component to display page numbers and navigation buttons
+
 export default function Pagination({
   currentPage,
   totalPages,
   totalProducts,
   productsPerPage,
-  
 }: PaginationProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -37,20 +35,25 @@ export default function Pagination({
     return pages;
   };
 
-   const showingFrom = (currentPage - 1) * productsPerPage + 1;
-   const showingTo = Math.min(currentPage * productsPerPage, totalProducts);
+  const showingFrom = (currentPage - 1) * productsPerPage + 1;
+  const showingTo = Math.min(currentPage * productsPerPage, totalProducts);
 
   return (
-    <div className="flex flex-col items-center gap-4 mt-6">
-      <p className="text-sm text-gray-500">
-          Showing {showingFrom} to {showingTo} of {totalProducts} products
+    <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-200 mt-2">
+
+      {/* Left side - metadata text */}
+      <p className="text-sm text-neutral-500">
+        Showing {showingFrom} to {showingTo} of {totalProducts} products
       </p>
-      <div className="flex items-center gap-2">
+
+      {/* Right side - navigation buttons */}
+      <div className="flex items-center gap-1">
+
         <button
           type="button"
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-3 py-1 rounded border text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100"
+          className="px-3 py-1 rounded border border-neutral-200 text-sm text-neutral-700 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-neutral-50"
         >
           Previous
         </button>
@@ -60,8 +63,10 @@ export default function Pagination({
             type="button"
             key={page}
             onClick={() => goToPage(page)}
-            className="px-3 py-1 rounded border text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100"
-            >
+            className={page === currentPage
+              ? "px-3 py-1 rounded border text-sm font-medium bg-purple-600 text-white border-purple-600"
+              : "px-3 py-1 rounded border border-neutral-200 text-sm text-neutral-700 hover:bg-neutral-50"}
+          >
             {page}
           </button>
         ))}
@@ -70,10 +75,11 @@ export default function Pagination({
           type="button"
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-3 py-1 rounded border text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100"
+          className="px-3 py-1 rounded border border-neutral-200 text-sm text-neutral-700 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-neutral-50"
         >
           Next
         </button>
+
       </div>
     </div>
   );
