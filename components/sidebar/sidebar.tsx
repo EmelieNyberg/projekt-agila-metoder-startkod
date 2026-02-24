@@ -24,7 +24,7 @@ export default function Sidebar({ className }: { className: string }) {
         </button>
       </div>
       <div
-        className={`${collapsed ? "scale-y-0 h-0" : "scale-y-100 h-auto"} grid origin-top grid-rows-[1fr_auto] transition duration-500 motion-reduce:duration-0 md:h-auto md:scale-y-100`}
+        className={`${collapsed ? "scale-y-0 h-0 hidden" : "scale-y-100 h-auto grid"} md:grid origin-top grid-rows-[1fr_auto] transition duration-500 motion-reduce:duration-0 md:h-auto md:scale-y-100`}
       >
         <SidebarNav />
         <section className="bottom-0 border-t border-t-neutral-300 p-6">
