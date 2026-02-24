@@ -13,19 +13,23 @@ type Props = {
   categories: Category[];
   search: string;
   category: string;
+  status: string;
 };
 
 export default function ProductFilterForm({
   categories,
   search,
   category,
+  status,
 }: Props) {
   return (
     <Form action="/" className="flex border border-gray-300 rounded-lg p-3 items-center gap-4 w-full">
       <SearchInput search={search} />
       <FilterControls 
         categories={categories}
-        category={category}/>
+        category={category}
+        status={status}
+      />
     </Form>
   );
 }
