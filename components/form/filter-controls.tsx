@@ -10,11 +10,13 @@ type Category = {
 type Props = {
   categories: Category[];
   category: string;
+  status: string;
 };
 
 export default function FilterControls({
   categories,
   category,
+  status,
 }: Props) {
   return (
     <div className="flex gap-3 items-center">
@@ -43,12 +45,12 @@ export default function FilterControls({
         <select
           name="status"
           className="appearance-none rounded-lg border border-gray-300 bg-white px-3 pr-10 py-2 text-sm"
-          defaultValue=""
+          defaultValue={status}
         >
           <option value="">All status</option>
-          <option value="in-stock">In stock</option>
-          <option value="low-stock">Low stock</option>
-          <option value="out-of-stock">Out of stock</option>
+          <option value="In Stock">In stock</option>
+          <option value="Low Stock">Low stock</option>
+          <option value="Out of Stock">Out of stock</option>
         </select>
 
         <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />

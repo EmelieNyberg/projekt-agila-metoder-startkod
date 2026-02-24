@@ -23,6 +23,7 @@ export default async function Home({
 
   const search = params?.search || "";
   const category = params?.category || "";
+  const status = params?.status || "";
   const currentPage = Number(params?.page) || 1;
 
   // Fetch categories to dropdown
@@ -39,6 +40,10 @@ export default async function Home({
 
   if (category) {
     query += `&categoryId=${category}`;
+  }
+
+  if (status) {
+    query += `&availabilityStatus=${status}`;
   }
 
   // we use the fetch() method to get the products from the API
@@ -68,6 +73,7 @@ export default async function Home({
           categories={categories}
           search={search}
           category={category}
+          status={status}
         />
 
         {/* Product listing */}
