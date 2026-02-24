@@ -7,7 +7,6 @@ interface ProductsTableProps {
 
 export default function ProductTable({ products }: ProductsTableProps) {
   return (
-    <div className="mt-4 border rounded-xl border-neutral-200 overflow-hidden">
       <table className="w-full">
         <thead className="border-b border-neutral-200">
           <tr className="bg-neutral-50">
@@ -26,6 +25,5 @@ export default function ProductTable({ products }: ProductsTableProps) {
           ))}
         </tbody>
       </table>
-    </div>
   );
 }

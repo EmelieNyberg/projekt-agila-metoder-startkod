@@ -53,15 +53,17 @@ export default async function Home({
         {products.length === 0 ? (
           <EmptyState />
         ) : (
-          <ProductTable products={products} />
-        )}
+          <div className="mt-4 border rounded-xl border-neutral-200 overflow-hidden">
+            <ProductTable products={products} />
 
-        <Pagination
-          currentPage={currentPage}
-          totalPages={pages}
-          totalProducts={total}
-          productsPerPage={Number(defaultLimit)}
-        />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={pages}
+              totalProducts={total}
+              productsPerPage={Number(defaultLimit)}
+            />
+          </div>
+        )}
       </main>
     </div>
   );
