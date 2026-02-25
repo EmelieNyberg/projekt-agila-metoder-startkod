@@ -25,18 +25,19 @@ export default function Modal({
     router.back();
   }
 
+  // createPortal: render modal content inside #modal-root element
   return createPortal(
     <div className="modal-backdrop">
       <dialog ref={dialogRef} className="modal" onClose={onDismiss}>
-        {children}
         <button
           type="button"
           onClick={onDismiss}
-          className="close-button"
           aria-label="close modal"
+          className="cursor-pointer rounded-md bg-transparent p-2 transition hover:bg-purple-900/85 hover:text-white"
         >
           <X />
         </button>
+        {children}
       </dialog>
     </div>,
     document.querySelector("#modal-root") as HTMLDivElement,

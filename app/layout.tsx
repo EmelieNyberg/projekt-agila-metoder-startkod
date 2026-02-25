@@ -17,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
+        {/* modal: React node from the @modal parallel route, injected by Next.js when that slot matches the current route */}
         {modal}
         <div id="modal-root"></div>
       </body>
