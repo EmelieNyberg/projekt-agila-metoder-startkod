@@ -60,3 +60,38 @@ export async function addProductAPI(formData: FormData) {
     // Redirects the user to / after the product has been created
     redirect("/");
 }
+
+
+// Update existing product
+export async function updateProductAPI(formData: FormData) {
+  const id = formData.get("id") as string;
+  const title = formData.get("title") as string;
+  const price = formData.get("price") as string;
+  const description = formData.get("description") as string;
+  const thumbnail = formData.get("thumbnail") as string;
+  const categoryId = formData.get("categoryId") as string;
+  const stock = formData.get("stock") as string;
+  const brand = formData.get("brand") as string;
+
+  const updatedProduct = {
+    title,
+    brand,
+    description,
+    thumbnail,
+    price: parseInt(price, 10),
+    categoryId: parseInt(categoryId, 10),
+    stock: parseInt(stock, 10),
+  };
+
+  const res = await fetch(`http://localhost:4000/products/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updatedProduct),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to update product");
+  }
+
+  revalidatePath("/");
+}

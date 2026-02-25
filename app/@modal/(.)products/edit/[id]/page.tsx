@@ -1,5 +1,6 @@
 import { Modal } from "@/components/global";
 import { Product } from "@/lib/types/product";
+import EditProductForm from "@/components/form/edit-product-form";
 
 export default async function EditModal({
   params,
@@ -19,8 +20,7 @@ export default async function EditModal({
 
   return (
     <Modal>
-      {/* should be replace with edit form/edit page component*/}
-      <div>Edit: {product.title}</div>
+      <EditProductForm product={product} />
     </Modal>
   );
 }
