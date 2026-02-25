@@ -2,6 +2,24 @@ import { Package, CircleCheck, TriangleAlert, CircleX } from "lucide-react";
 import StatsCard from "./stats-card";
 import AddProductButton from "./add-product-button";
 
+
+// Props interface - real numbers will come from page.tsx
+interface PageHeaderProps {
+  totalProducts: number;
+  inStock: number;
+  lowStock: number;
+  outOfStock: number;
+}
+
+// Update function signature only - still using hardcoded values for now
+export default function PageHeader({
+  totalProducts,
+  inStock,
+  lowStock,
+  outOfStock,
+}: PageHeaderProps) {
+
+  
 // All cards with statistics (at the moment placeholder info)
 const stats = [
   {
