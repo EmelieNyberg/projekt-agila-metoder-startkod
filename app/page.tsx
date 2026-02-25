@@ -20,7 +20,6 @@ export default async function Home({
   }>;
 }) {
   const params = await searchParams;
-
   const search = params?.search || "";
   const category = params?.category || "";
   const status = params?.status || "";
