@@ -1,8 +1,9 @@
 import Form from "next/form";
+import { addProductAPI } from "@/lib/actions";
 
 export default function AddProductForm() {
     return (
-        <Form action="" className="py-2">
+        <Form action={addProductAPI} className="py-2">
             <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 items-center">
                 <label className="font-semibold" htmlFor="title">
                     Title
