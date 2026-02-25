@@ -7,7 +7,10 @@ import { usePathname } from "next/navigation";
 
 export default function SidebarNavItem({ item }: { item: NavItem }) {
   const pathName = usePathname();
-  const isActive = pathName === item.link;
+  const isActive =
+    pathName === item.link ||
+    (pathName.includes("products") &&
+      item.label.toLowerCase().includes("products"));
 
   return (
     <Link

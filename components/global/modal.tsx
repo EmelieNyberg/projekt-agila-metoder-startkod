@@ -27,19 +27,21 @@ export default function Modal({
 
   // createPortal: render modal content inside #modal-root element
   return createPortal(
-    <div className="modal-backdrop">
-      <dialog ref={dialogRef} className="modal" onClose={onDismiss}>
-        <button
-          type="button"
-          onClick={onDismiss}
-          aria-label="close modal"
-          className="cursor-pointer rounded-md bg-transparent p-2 transition hover:bg-purple-900/85 hover:text-white"
-        >
-          <X />
-        </button>
-        {children}
-      </dialog>
-    </div>,
+    <dialog ref={dialogRef} className="relative z-10" onClose={onDismiss}>
+      <div className="fixed inset-0 bg-gray-900/40 transition-opacity flex items-center justify-center">
+        <div className="grid grid-rows-[auto_1fr] w-fit bg-neutral-100 p-4 rounded-xl">
+          <button
+            type="button"
+            onClick={onDismiss}
+            aria-label="close modal"
+            className="cursor-pointer rounded-md bg-transparent p-2 transition hover:bg-purple-900/85 hover:text-white w-fit place-self-start"
+          >
+            <X />
+          </button>
+          {children}
+        </div>
+      </div>
+    </dialog>,
     document.querySelector("#modal-root") as HTMLDivElement,
   );
 }

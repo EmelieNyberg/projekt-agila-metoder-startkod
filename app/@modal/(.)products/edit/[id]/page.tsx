@@ -7,5 +7,9 @@ export default async function EditModal({
 }) {
   const { id } = await params;
 
-  return <Modal>{id}</Modal>;
+  return (
+    <Modal>
+      <div>Edit: {id}</div>
+    </Modal>
+  );
 }
