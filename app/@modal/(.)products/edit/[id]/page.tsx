@@ -1,5 +1,5 @@
 import { Modal } from "@/components/global";
-import { Product } from "@/lib/types/product";
+import type { Product } from "@/lib/types/product";
 
 export default async function EditModal({
   params,
