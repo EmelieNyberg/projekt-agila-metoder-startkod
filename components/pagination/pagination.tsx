@@ -1,7 +1,9 @@
 // components/pagination/pagination.tsx
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface PaginationProps {
   currentPage: number;
@@ -16,14 +18,8 @@ export default function Pagination({
   totalProducts,
   productsPerPage,
 }: PaginationProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
-
-  const goToPage = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", page.toString());
-    router.push(`?${params.toString()}`);
-  };
+  const [currentParams, setCurrentParams] = useState<string>("");
 
   const getPageNumbers = () => {
     const pages: number[] = [];
@@ -38,9 +34,23 @@ export default function Pagination({
   const showingFrom = (currentPage - 1) * productsPerPage + 1;
   const showingTo = Math.min(currentPage * productsPerPage, totalProducts);
 
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    // remove page from the params
+    if (params.get("page")) {
+      params.delete("page");
+    }
+
+    // define the new params
+    const newParams = params.size > 0 ? `&${params.toString()}` : "";
+
+    // update the currentParams
+    setCurrentParams(newParams);
+  }, [searchParams]);
+
   return (
     <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-200 mt-2">
-
       {/* Left side - metadata text */}
       <p className="text-sm text-neutral-500">
         Showing {showingFrom} to {showingTo} of {totalProducts} products
@@ -48,39 +58,47 @@ export default function Pagination({
 
       {/* Right side - navigation buttons */}
       <div className="flex items-center gap-1">
-
-        <button
-          type="button"
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-3 py-1 rounded border border-neutral-200 text-sm text-neutral-700 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-neutral-50"
-        >
-          Previous
-        </button>
+        <div className="px-3 py-1 rounded border border-neutral-200 text-sm text-neutral-700">
+          {currentPage <= 1 ? (
+            <span className="opacity-40 cursor-not-allowed ">Previous</span>
+          ) : (
+            <Link
+              href={`/?page=${currentPage - 1}${currentParams}`}
+              className=" hover:bg-neutral-50"
+            >
+              Previous
+            </Link>
+          )}
+        </div>
 
         {getPageNumbers().map((page) => (
-          <button
-            type="button"
-            key={page}
-            onClick={() => goToPage(page)}
-            className={page === currentPage
-              ? "px-3 py-1 rounded border text-sm font-medium bg-purple-600 text-white border-purple-600"
-              : "px-3 py-1 rounded border border-neutral-200 text-sm text-neutral-700 hover:bg-neutral-50"}
+          <Link
+            href={`/?page=${page}${currentParams}}`}
+            key={`page-${page}`}
+            className={
+              page === currentPage
+                ? "px-3 py-1 rounded border text-sm font-medium bg-purple-600 text-white border-purple-600"
+                : "px-3 py-1 rounded border border-neutral-200 text-sm text-neutral-700 hover:bg-neutral-50"
+            }
           >
             {page}
-          </button>
+          </Link>
         ))}
 
-        <button
-          type="button"
-          onClick={() => goToPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-3 py-1 rounded border border-neutral-200 text-sm text-neutral-700 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-neutral-50"
-        >
-          Next
-        </button>
-
+        <div className="px-3 py-1 rounded border border-neutral-200 text-sm text-neutral-700">
+          {currentPage === totalPages ? (
+            <span className="opacity-40 cursor-not-allowed ">Next</span>
+          ) : (
+            <Link
+              href={`/?page=${currentPage + 1}${currentParams}`}
+              className="hover:bg-neutral-50"
+            >
+              Next
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
 }
+
