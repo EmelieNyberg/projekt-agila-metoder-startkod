@@ -1,6 +1,7 @@
 import { Package, CircleCheck, TriangleAlert, CircleX } from "lucide-react";
 import StatsCard from "./stats-card";
 import AddProductButton from "./add-product-button";
+import AddProductLink from "./add-product-link";
 
 // All cards with statistics (at the moment placeholder info)
 const stats = [
@@ -42,7 +43,7 @@ export default function PageHeader() {
           <h1 className="text-2xl font-semibold">Product management</h1>
           <p className="text-sm text-gray-500">Manage your store inventory</p>
         </div>
-        <AddProductButton />
+        <AddProductLink />
       </section>
 
       {/* Section with all stats cards */}
@@ -61,4 +62,3 @@ export default function PageHeader() {
     </header>
   );
 }
-
