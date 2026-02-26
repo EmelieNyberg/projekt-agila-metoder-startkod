@@ -40,13 +40,13 @@ export default async function Home({
     `${API_URL}/products?${query}`,
   ).then((res) => res.json());
 
-  // Added this - Fetch ALL products to count stats
+  // Fetch ALL products to count stats
   const { products: allProducts }: ProductsResponse = await fetch(
     `${API_URL}/products?_limit=1000&_expand=category`,
     { cache: "no-store" }
   ).then((res) => res.json());
 
-  // YOUR ADDITION - Count each status from real data
+  // Count each status from real data
   const totalProducts = allProducts.length;
   const inStock = allProducts.filter(
     (p) => p.availabilityStatus?.toLowerCase() === "in stock"
