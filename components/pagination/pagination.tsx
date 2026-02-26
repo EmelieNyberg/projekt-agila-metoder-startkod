@@ -73,7 +73,7 @@ export default function Pagination({
 
         {getPageNumbers().map((page) => (
           <Link
-            href={`/?page=${page}${currentParams}}`}
+            href={`/?page=${page}${currentParams}`}
             key={`page-${page}`}
             className={
               page === currentPage
