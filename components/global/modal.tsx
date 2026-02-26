@@ -2,7 +2,7 @@
 
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { type ComponentRef, useEffect, useRef } from "react";
+import { type ComponentRef, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 export default function Modal({
@@ -11,21 +11,30 @@ export default function Modal({
   children: React.ReactNode;
 }): React.ReactNode {
   const router = useRouter();
+  
+  // Track whether the component has mounted on the client
+  // This is needed because createPortal uses `document` which doesn't exist during server-side prerendering
+  const [mounted, setMounted] = useState(false);
 
-  // create ref element
   const dialogRef = useRef<ComponentRef<"dialog">>(null);
 
-  // open modal for current modal element (ref) if not already open
+  // Set mounted to true after the component has mounted on the client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (!dialogRef.current?.open) dialogRef.current?.showModal();
   }, []);
 
-  // navigate back to close modal
   function onDismiss() {
     router.back();
   }
 
-  // createPortal: render modal content inside #modal-root element
+  // Prevent rendering during SSR/prerendering to avoid "document is not defined" error
+  // The portal can only be created after the component has mounted on the client
+  if (!mounted) return null;
+
   return createPortal(
     <dialog ref={dialogRef} className="relative z-10" onClose={onDismiss}>
       <div className="fixed inset-0 flex items-center justify-center bg-gray-900/40 transition-opacity">
