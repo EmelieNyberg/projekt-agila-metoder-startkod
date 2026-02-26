@@ -20,64 +20,62 @@ export default async function Home({
   }>;
 }) {
   const params = await searchParams;
-
   const search = params?.search || "";
-  const category = params?.category || "";
-  const status = params?.status || "";
+  const category = params?.category || "";  
+  const status = params?.status || "";      
   const currentPage = Number(params?.page) || 1;
 
-  // Fetch categories to dropdown
   const categories = await fetch(`${API_URL}/categories`, {
     cache: "no-store",
   }).then((res) => res.json());
 
-  // Build query for products
   let query = `_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category&_page=${currentPage}`;
 
-  if (search) {
-    query += `&q=${search}`;
-  }
+  if (search) query += `&q=${search}`;
+  if (category) query += `&categoryId=${category}`;
+  if (status) query += `&availabilityStatus=${status}`;
 
-  if (category) {
-    query += `&categoryId=${category}`;
-  }
-
-  if (status) {
-    query += `&availabilityStatus=${status}`;
-  }
-
-  // we use the fetch() method to get the products from the API
-  // in this fetch we sort using _sort and _order and we limit the number of products using _limit
-  // we also use _expand to get the relational category data
-  // we can use the other destructed variables like page, total and so on to create pagination or show info
+  // Fetch current page of products for the table
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
     `${API_URL}/products?${query}`,
   ).then((res) => res.json());
 
-  // second api call to get all products without the limit 
-  // so that we can show the correct number of total products in the header and pagination
-  const { products: productStats }: ProductsResponse  = await fetch(
-    `${API_URL}/products`,
+  // Added this - Fetch ALL products to count stats
+  const { products: allProducts }: ProductsResponse = await fetch(
+    `${API_URL}/products?_limit=1000&_expand=category`,
+    { cache: "no-store" }
   ).then((res) => res.json());
+
+  // YOUR ADDITION - Count each status from real data
+  const totalProducts = allProducts.length;
+  const inStock = allProducts.filter(
+    (p) => p.availabilityStatus?.toLowerCase() === "in stock"
+  ).length;
+  const lowStock = allProducts.filter(
+    (p) => p.availabilityStatus?.toLowerCase() === "low stock"
+  ).length;
+  const outOfStock = allProducts.filter(
+    (p) => p.availabilityStatus?.toLowerCase() === "out of stock"
+  ).length;
 
   return (
     <div
       className="min-h-screen md:grid 
       md:[grid-template-areas:'sidebar_header_header''sidebar_form_form''sidebar_main_main']"
     >
-      <Sidebar className="md:[grid-area:sidebar]  " />
+      <Sidebar className="md:[grid-area:sidebar]" />
 
-      {/* Header - full width */}
+      {/* Added this - Pass real stats to PageHeader */}
       <PageHeader
-      totalProducts={productStats.length}
-      inStock={productStats.filter(p => p.availabilityStatus === "In Stock").length} 
-      lowStock={productStats.filter(p => p.availabilityStatus === "Low Stock").length}
-      outOfStock={productStats.filter(p => p.availabilityStatus === "Out of Stock").length}
+        totalProducts ={totalProducts}
+        inStock={inStock}
+        lowStock={lowStock}
+        outOfStock={outOfStock}
       />
 
-      {/* Main content area */}
-      <main className="min-h-screen  md:[grid-area:main] p-6 ">
-        {/* Products Search & Filter */}
+      <main className="min-h-screen md:[grid-area:main] p-6">
+
+        {/* TEAMMATE's addition - passes categories and filters */}
         <ProductFilterForm
           categories={categories}
           search={search}
@@ -85,13 +83,11 @@ export default async function Home({
           status={status}
         />
 
-        {/* Product listing */}
         {products.length === 0 ? (
           <EmptyState />
         ) : (
           <div className="mt-4 border rounded-xl border-neutral-200 overflow-hidden">
             <ProductTable products={products} />
-
             <Pagination
               currentPage={currentPage}
               totalPages={pages}

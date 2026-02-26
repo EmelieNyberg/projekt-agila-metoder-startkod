@@ -1,4 +1,5 @@
 import type { Product } from "@/lib/types/product";
+import EditProductForm from "@/components/form/edit-product-form";
 
 export default async function EditProductPage({
   params,
@@ -19,7 +20,8 @@ export default async function EditProductPage({
   return (
     <div>
       <h1 className="font-bold font-xl md:font-2xl">Edit: {product.title}</h1>
-      {/* Form goes here */}
+      {/* Edit form */}
+      <EditProductForm product={product} />
     </div>
   );
 }

@@ -2,8 +2,7 @@ import { Package, CircleCheck, TriangleAlert, CircleX } from "lucide-react";
 import StatsCard from "./stats-card";
 import AddProductButton from "./add-product-button";
 
-
-// Props interface - real numbers will come from page.tsx
+// Added props interface - accepts real numbers from page.tsx
 interface PageHeaderProps {
   totalProducts: number;
   inStock: number;
@@ -11,7 +10,6 @@ interface PageHeaderProps {
   outOfStock: number;
 }
 
-// Update function signature only - still using hardcoded values for now
 export default function PageHeader({
   totalProducts,
   inStock,
@@ -19,39 +17,37 @@ export default function PageHeader({
   outOfStock,
 }: PageHeaderProps) {
 
-
-// All cards with statistics (at the moment placeholder info)
-const stats = [
-   {
+  // Now uses real data from props instead of hardcoded numbers
+  const stats = [
+    {
       title: "Total products",
-      value: totalProducts,        // was 248
+      value: totalProducts,
       icon: Package,
       color: "text-purple-600",
       bg: "bg-purple-100",
     },
     {
       title: "In stock",
-      value: inStock,              //  was 189
+      value: inStock,
       icon: CircleCheck,
       color: "text-green-600",
       bg: "bg-green-100",
     },
     {
       title: "Low stock",
-      value: lowStock,             // was 34
+      value: lowStock,
       icon: TriangleAlert,
       color: "text-yellow-600",
       bg: "bg-yellow-100",
     },
     {
       title: "Out of stock",
-      value: outOfStock,           //  was 25
+      value: outOfStock,
       icon: CircleX,
       color: "text-red-600",
       bg: "bg-red-100",
     },
   ];
-
 
   return (
     <header className="w-full md:[grid-area:header]">
@@ -62,8 +58,6 @@ const stats = [
         </div>
         <AddProductButton />
       </section>
-
-      {/* Section with all stats cards */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
         {stats.map((stat) => (
           <StatsCard
@@ -79,4 +73,3 @@ const stats = [
     </header>
   );
 }
-

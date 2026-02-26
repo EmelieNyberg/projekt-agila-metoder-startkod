@@ -1,9 +1,14 @@
 import Form from "next/form";
-import { addProductAPI } from "@/lib/actions";
+import type { Product } from "@/lib/types/product";
+import { updateProductAPI } from "@/lib/actions";
 
-export default function AddProductForm() {
+
+export default function EditProductForm({ product }: { product: Product }) {
     return (
-        <Form action={addProductAPI} className="py-2">
+        <Form action={updateProductAPI} className="py-2">
+            {/* Send id with the form */}
+            <input readOnly name="id" value={product.id} hidden />
+            
             <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 items-center">
                 <label className="font-semibold" htmlFor="title">
                     Title
@@ -15,6 +20,7 @@ export default function AddProductForm() {
                     name="title"
                     minLength={3}
                     maxLength={20}
+                    defaultValue={product.title}
                     required
                 />
                 <label className="font-semibold" htmlFor="brand">
@@ -25,6 +31,7 @@ export default function AddProductForm() {
                     type="text"
                     id="brand"
                     name="brand"
+                    defaultValue={product.brand}
                     required
                 />
                 <label className="font-semibold" htmlFor="price">
@@ -37,6 +44,7 @@ export default function AddProductForm() {
                     step="0.01"
                     id="price"
                     name="price"
+                    defaultValue={product.price}
                     required
                 />
                 <label className="font-semibold" htmlFor="stock">
@@ -47,6 +55,7 @@ export default function AddProductForm() {
                     type="number"
                     id="stock"
                     name="stock"
+                    defaultValue={product.stock}
                     required
                 />
                 <label className="font-semibold" htmlFor="categoryId">
@@ -57,6 +66,7 @@ export default function AddProductForm() {
                     type="number"
                     id="categoryId"
                     name="categoryId"
+                    defaultValue={product.categoryId}
                     required
                 />
                 <label className="font-semibold" htmlFor="description">
@@ -68,6 +78,7 @@ export default function AddProductForm() {
                     name="description"
                     minLength={5}
                     maxLength={400}
+                    defaultValue={product.description}
                     required
                 />
                 <label className="font-semibold" htmlFor="thumbnail">
@@ -78,6 +89,7 @@ export default function AddProductForm() {
                     type="url"
                     id="thumbnail"
                     name="thumbnail"
+                    defaultValue={product.thumbnail}
                     required
                 />
             </div>
