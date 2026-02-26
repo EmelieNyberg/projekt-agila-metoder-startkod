@@ -17,8 +17,7 @@ export default function AddProductButton() {
       </button>
 
       {/* if isOpen = true, set isOpen to false on close  */}
-      {isOpen && <AddProductModal onClose={() => setIsOpen(false)} />}
+      {/* isOpen && <AddProductModal onClose={() => setIsOpen(false)} /> */}
     </>
   );
 }
-
