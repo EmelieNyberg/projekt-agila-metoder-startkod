@@ -12,7 +12,7 @@ const defaultLimit = "6";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ 
+  searchParams: Promise<{
     search?: string;
     category?: string;
     status?: string;
