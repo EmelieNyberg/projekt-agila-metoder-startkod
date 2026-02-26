@@ -39,9 +39,9 @@ export async function addProductAPI(formData: FormData) {
         brand,
         description,
         thumbnail,
-        price: parseInt(price, 10), // Is number in the DB
-        categoryId: parseInt(categoryId, 10),
-        stock: parseInt(stock, 10),
+        price: (parseInt(price, 10) < 1) ? 0 : parseInt(price, 10),
+        categoryId: (parseInt(categoryId, 10) < 1) ? 1 : parseInt(categoryId, 10),
+        stock: (parseInt(stock, 10) > 0) ? parseInt(stock, 10) : 0,
         availabilityStatus: parseInt(stock, 10) > 25 ? "In Stock" : parseInt(stock, 10) < 5 && parseInt(stock, 10) > 0 ? "Low Stock" : "Out of Stock",
     };
 
@@ -79,9 +79,9 @@ export async function updateProductAPI(formData: FormData) {
     brand,
     description,
     thumbnail,
-    price: parseInt(price, 10),
-    categoryId: parseInt(categoryId, 10),
-    stock: parseInt(stock, 10),
+    price: (parseInt(price, 10) < 1) ? 0 : parseInt(price, 10),
+    categoryId: (parseInt(categoryId, 10) < 1) ? 1 : parseInt(categoryId, 10),
+    stock: (parseInt(stock, 10) > 0) ? parseInt(stock, 10) : 0,
     availabilityStatus: parseInt(stock, 10) > 25 ? "In Stock" : parseInt(stock, 10) < 5 && parseInt(stock, 10) > 0 ? "Low Stock" : "Out of Stock",
   };
 
