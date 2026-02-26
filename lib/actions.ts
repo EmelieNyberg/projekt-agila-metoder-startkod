@@ -2,8 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 
-type FormProduct = {};
-
 type StockStatus = "In Stock" | "Low Stock" | "Out of Stock";
 
 type ParsedProduct = {

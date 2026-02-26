@@ -1,7 +1,7 @@
 import Form from "next/form";
 import { addProductAPI } from "@/lib/actions";
 import { getProductCateggories } from "@/lib/product";
-import { Category } from "@/lib/types/product";
+import type { Category } from "@/lib/types/product";
 
 export default async function AddProductForm() {
   const categories = await getProductCateggories();
