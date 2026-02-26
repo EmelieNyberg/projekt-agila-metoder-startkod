@@ -43,8 +43,7 @@ export default function FilterControls({
       <div className="relative">
         <select
           name="status"
-          className="appearance-none rounded-lg border border-gray-300 bg-white px-3 pr-10 py-2 text-sm
-          hover:bg-gray-100 hover:shadow-md active:bg-gray-200 active:shadow-sm"
+          className="appearance-none rounded-lg border border-gray-300 bg-white px-3 pr-10 py-2 text-sm hover:bg-gray-100 hover:shadow-md active:bg-gray-200 active:shadow-sm"
           defaultValue={status}
         >
           <option value="">All status</option>
@@ -59,8 +58,7 @@ export default function FilterControls({
       {/* Submit Button */}
       <button
         type="submit"
-        className="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm 
-      hover:bg-gray-100 hover:shadow-md active:bg-gray-200 active:shadow-sm"
+        className="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-100 hover:shadow-md active:bg-gray-200 active:shadow-sm"
       >
         <Filter className="w-4 h-4 text-gray-500" />
         Filter
@@ -68,4 +66,3 @@ export default function FilterControls({
     </div>
   );
 }
-
