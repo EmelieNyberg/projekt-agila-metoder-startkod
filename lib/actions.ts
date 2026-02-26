@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { parse } from "path/win32";
 
 // In this server action we get the id directly and pass that along to the API
 // we then call revalidatePath to revalidate the cache for the homepage so that the deleted product is removed from the list
