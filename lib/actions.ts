@@ -42,6 +42,7 @@ export async function addProductAPI(formData: FormData) {
         price: parseInt(price, 10), // Is number in the DB
         categoryId: parseInt(categoryId, 10),
         stock: parseInt(stock, 10),
+        availabilityStatus: parseInt(stock, 10) > 25 ? "In Stock" : parseInt(stock, 10) < 5 && parseInt(stock, 10) > 0 ? "Low Stock" : "Out of Stock",
     };
 
     // POST data to API
@@ -81,6 +82,7 @@ export async function updateProductAPI(formData: FormData) {
     price: parseInt(price, 10),
     categoryId: parseInt(categoryId, 10),
     stock: parseInt(stock, 10),
+    availabilityStatus: parseInt(stock, 10) > 25 ? "In Stock" : parseInt(stock, 10) < 5 && parseInt(stock, 10) > 0 ? "Low Stock" : "Out of Stock",
   };
 
   const res = await fetch(`http://localhost:4000/products/${id}`, {
