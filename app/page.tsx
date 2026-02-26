@@ -54,6 +54,12 @@ export default async function Home({
     `${API_URL}/products?${query}`,
   ).then((res) => res.json());
 
+  // second api call to get all products without the limit 
+  // so that we can show the correct number of total products in the header and pagination
+  const { products: productStats }: ProductsResponse  = await fetch(
+    `${API_URL}/products`,
+  ).then((res) => res.json());
+
   return (
     <div
       className="min-h-screen md:grid 
@@ -62,7 +68,12 @@ export default async function Home({
       <Sidebar className="md:[grid-area:sidebar]  " />
 
       {/* Header - full width */}
-      <PageHeader />
+      <PageHeader
+      totalProducts={productStats.length}
+      inStock={productStats.filter(p => p.availabilityStatus === "In Stock").length} 
+      lowStock={productStats.filter(p => p.availabilityStatus === "Low Stock").length}
+      outOfStock={productStats.filter(p => p.availabilityStatus === "Out of Stock").length}
+      />
 
       {/* Main content area */}
       <main className="min-h-screen  md:[grid-area:main] p-6 ">
