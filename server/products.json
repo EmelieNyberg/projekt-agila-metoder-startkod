@@ -11684,10 +11684,10 @@
       "id": 193,
       "title": "Watch Gold for Women",
       "description": "The Gold Women's Watch is a stunning accessory that combines luxury and style. Featuring a gold-plated case and a chic design, it adds a touch of glamour to any outfit.",
-      "price": 799,
+      "price": 799.99,
       "discountPercentage": 18.34,
       "rating": 4.24,
-      "stock": 10,
+      "stock": 0,
       "tags": [
         "watches",
         "women's watches"
@@ -11702,7 +11702,7 @@
       },
       "warrantyInformation": "2 year warranty",
       "shippingInformation": "Ships in 1-2 business days",
-      "availabilityStatus": "Low Stock",
+      "availabilityStatus": "Out of Stock",
       "reviews": [
         {
           "rating": 4,
