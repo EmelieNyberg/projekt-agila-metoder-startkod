@@ -1,67 +1,100 @@
-"use server"
+"use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+
+type StockStatus = "In Stock" | "Low Stock" | "Out of Stock";
+
+type ParsedProduct = {
+  title: string;
+  brand: string;
+  description: string;
+  thumbnail: string;
+  price: number;
+  categoryId: number;
+  stock: number;
+  availabilityStatus: StockStatus;
+};
+
+const parseProduct = (
+  title: string,
+  brand: string,
+  description: string,
+  thumbnail: string,
+  price: string,
+  categoryId: string,
+  stock: string,
+): ParsedProduct => {
+  return {
+    title,
+    brand,
+    description,
+    thumbnail,
+    price: parseInt(price, 10), // Is number in the DB
+    categoryId: parseInt(categoryId, 10),
+    stock: parseInt(stock, 10),
+    availabilityStatus:
+      parseInt(stock, 10) >= 25
+        ? "In Stock"
+        : parseInt(stock, 10) > 0
+          ? "Low Stock"
+          : "Out of Stock",
+  };
+};
 
 // In this server action we get the id directly and pass that along to the API
 // we then call revalidatePath to revalidate the cache for the homepage so that the deleted product is removed from the list
 export async function deleteProductAPI(id: number) {
-    //  const res = await fetch(`${API_URL}/products/${id}`, {
+  //  const res = await fetch(`${API_URL}/products/${id}`, {
 
-    // Hardcoded for now, in a real app we would want to get this from an environment variable or config file
-    const res = await fetch(`http://localhost:4000/products/${id}`, {
-        method: "DELETE",
-    });
+  // Hardcoded for now, in a real app we would want to get this from an environment variable or config file
+  const res = await fetch(`http://localhost:4000/products/${id}`, {
+    method: "DELETE",
+  });
 
-    if (!res.ok) {
-        // We need to handle this error somehow?
-    }
+  if (!res.ok) {
+    // We need to handle this error somehow?
+  }
 
-    revalidatePath("");
+  revalidatePath("/");
 }
-
 
 // Add new product
 export async function addProductAPI(formData: FormData) {
+  // Here is all the data from the submitted form
+  const title = formData.get("title") as string;
+  const price = formData.get("price") as string;
+  const description = formData.get("description") as string;
+  const thumbnail = formData.get("thumbnail") as string;
+  const categoryId = formData.get("categoryId") as string;
+  const stock = formData.get("stock") as string;
+  const brand = formData.get("brand") as string;
 
-    // Here is all the data from the submitted form
-    const title = formData.get("title") as string;
-    const price = formData.get("price") as string;
-    const description = formData.get("description") as string;
-    const thumbnail = formData.get("thumbnail") as string;
-    const categoryId = formData.get("categoryId") as string;
-    const stock = formData.get("stock") as string;
-    const brand = formData.get("brand") as string;
+  // This is the object we want to POST to the API
+  const newProduct = parseProduct(
+    title,
+    brand,
+    description,
+    thumbnail,
+    price,
+    categoryId,
+    stock,
+  );
 
-    // This is the object we want to POST to the API
-    const newProduct = {
-        title,
-        brand,
-        description,
-        thumbnail,
-        price: (parseInt(price, 10) < 1) ? 0 : parseInt(price, 10),
-        categoryId: (parseInt(categoryId, 10) < 1) ? 1 : parseInt(categoryId, 10),
-        stock: (parseInt(stock, 10) > 0) ? parseInt(stock, 10) : 0,
-        availabilityStatus: parseInt(stock, 10) > 25 ? "In Stock" : parseInt(stock, 10) < 5 && parseInt(stock, 10) > 0 ? "Low Stock" : "Out of Stock",
-    };
+  console.log(newProduct);
 
-    // POST data to API
-    const res = await fetch(`http://localhost:4000/products/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newProduct),
-    });
+  // POST data to API
+  const res = await fetch(`http://localhost:4000/products/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newProduct),
+  });
 
-    const data = await res.json();
-    console.log(data);
+  const data = await res.json();
+  console.log(data);
 
-    // When the user returns to /, the new product should be visible immediately (without needing a hard refresh)
-    revalidatePath("/");
-
-    // Redirects the user to / after the product has been created
-    redirect("/");
+  // When the user returns to /, the new product should be visible immediately (without needing a hard refresh)
+  revalidatePath("/");
 }
-
 
 // Update existing product
 export async function updateProductAPI(formData: FormData) {
@@ -74,16 +107,15 @@ export async function updateProductAPI(formData: FormData) {
   const stock = formData.get("stock") as string;
   const brand = formData.get("brand") as string;
 
-  const updatedProduct = {
+  const updatedProduct = parseProduct(
     title,
     brand,
     description,
     thumbnail,
-    price: (parseInt(price, 10) < 1) ? 0 : parseInt(price, 10),
-    categoryId: (parseInt(categoryId, 10) < 1) ? 1 : parseInt(categoryId, 10),
-    stock: (parseInt(stock, 10) > 0) ? parseInt(stock, 10) : 0,
-    availabilityStatus: parseInt(stock, 10) > 25 ? "In Stock" : parseInt(stock, 10) < 5 && parseInt(stock, 10) > 0 ? "Low Stock" : "Out of Stock",
-  };
+    price,
+    categoryId,
+    stock,
+  );
 
   const res = await fetch(`http://localhost:4000/products/${id}`, {
     method: "PATCH",
@@ -97,3 +129,4 @@ export async function updateProductAPI(formData: FormData) {
 
   revalidatePath("/");
 }
+

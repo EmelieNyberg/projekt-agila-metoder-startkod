@@ -11746,10 +11746,10 @@
       "id": 194,
       "title": "Women's Wrist Watch",
       "description": "The Women's Wrist Watch is a versatile and fashionable timepiece for everyday wear. With a comfortable strap and a simple yet elegant design, it complements various styles.",
-      "price": 129.99,
+      "price": 129,
       "discountPercentage": 12.6,
       "rating": 3.52,
-      "stock": 12,
+      "stock": 0,
       "tags": [
         "watches",
         "women's watches"
@@ -11764,7 +11764,7 @@
       },
       "warrantyInformation": "1 year warranty",
       "shippingInformation": "Ships in 2 weeks",
-      "availabilityStatus": "In Stock",
+      "availabilityStatus": "Out of Stock",
       "reviews": [
         {
           "rating": 4,

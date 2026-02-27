@@ -1,6 +1,7 @@
 import { Package, CircleCheck, TriangleAlert, CircleX } from "lucide-react";
 import StatsCard from "./stats-card";
 import AddProductButton from "./add-product-button";
+import AddProductLink from "./add-product-link";
 
 // Added props interface - accepts real numbers from page.tsx
 interface PageHeaderProps {
@@ -16,7 +17,6 @@ export default function PageHeader({
   lowStock,
   outOfStock,
 }: PageHeaderProps) {
-
   // Now uses real data from props instead of hardcoded numbers
   const stats = [
     {
@@ -56,7 +56,7 @@ export default function PageHeader({
           <h1 className="text-2xl font-semibold">Product management</h1>
           <p className="text-sm text-gray-500">Manage your store inventory</p>
         </div>
-        <AddProductButton />
+        <AddProductLink />
       </section>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
         {stats.map((stat) => (
@@ -73,3 +73,4 @@ export default function PageHeader({
     </header>
   );
 }
+

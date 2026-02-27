@@ -5,6 +5,7 @@ import ProductTable from "@/components/product-table/product-table";
 import PageHeader from "@/components/header/page-header";
 import Pagination from "@/components/pagination/pagination";
 import EmptyState from "../components/form/empty-state";
+import { getProductCateggories } from "@/lib/product";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -21,13 +22,11 @@ export default async function Home({
 }) {
   const params = await searchParams;
   const search = params?.search || "";
-  const category = params?.category || "";  
-  const status = params?.status || "";      
+  const category = params?.category || "";
+  const status = params?.status || "";
   const currentPage = Number(params?.page) || 1;
 
-  const categories = await fetch(`${API_URL}/categories`, {
-    cache: "no-store",
-  }).then((res) => res.json());
+  const categories = await getProductCateggories();
 
   let query = `_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category&_page=${currentPage}`;
 
@@ -43,19 +42,19 @@ export default async function Home({
   // Fetch ALL products to count stats
   const { products: allProducts }: ProductsResponse = await fetch(
     `${API_URL}/products?_limit=1000&_expand=category`,
-    { cache: "no-store" }
+    { cache: "no-store" },
   ).then((res) => res.json());
 
   // Count each status from real data
   const totalProducts = allProducts.length;
   const inStock = allProducts.filter(
-    (p) => p.availabilityStatus?.toLowerCase() === "in stock"
+    (p) => p.availabilityStatus?.toLowerCase() === "in stock",
   ).length;
   const lowStock = allProducts.filter(
-    (p) => p.availabilityStatus?.toLowerCase() === "low stock"
+    (p) => p.availabilityStatus?.toLowerCase() === "low stock",
   ).length;
   const outOfStock = allProducts.filter(
-    (p) => p.availabilityStatus?.toLowerCase() === "out of stock"
+    (p) => p.availabilityStatus?.toLowerCase() === "out of stock",
   ).length;
 
   return (
@@ -67,14 +66,13 @@ export default async function Home({
 
       {/* Added this - Pass real stats to PageHeader */}
       <PageHeader
-        totalProducts ={totalProducts}
+        totalProducts={totalProducts}
         inStock={inStock}
         lowStock={lowStock}
         outOfStock={outOfStock}
       />
 
       <main className="min-h-screen md:[grid-area:main] p-6">
-
         {/* TEAMMATE's addition - passes categories and filters */}
         <ProductFilterForm
           categories={categories}
@@ -100,3 +98,4 @@ export default async function Home({
     </div>
   );
 }
+
